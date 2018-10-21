@@ -16,27 +16,24 @@ struct tNode
 	int iData;
 };
 
-void searchTree(tNode* pNode, int Data)
+void searchTree(tNode* pNode, int Data) // 노드 검색
 {
-	if (pNode == NULL)
-		cout << "노드가 비어있습니다." << endl;
+	if (pNode == NULL) // 노드가 비어있을 경우(검색한 값이 존재하지 않을 경우)
+		cout << "찾으시는 값은 노드에 존재하지 않습니다." << endl;
 
-	if (pNode->iData == Data)
+	else if (pNode->iData == Data) // 검색한 값과 노드가 같을 경우
 		cout << "검색하신 값 " << Data << "은(는) 노드에 존재합니다." << endl;
 
-	else if (Data < pNode->iData)
+	else if (Data < pNode->iData) // 검색한 값이 현재 노드값보다 작을 경우
 		searchTree(pNode->left, Data);
 
-	else if (Data > pNode->iData)
+	else if (Data > pNode->iData) // 검색한 값이 현재 노드값보다 클 경우
 		searchTree(pNode->right, Data);
-
-	else
-		cout << "찾으시는 값은 노드에 존재하지 않습니다." << endl;
 }
 
-tNode* insertTree(tNode* pNode, int Data)
+tNode* insertTree(tNode* pNode, int Data) // 노드 삽입
 {
-	if (pNode == NULL)
+	if (pNode == NULL) // 만약 노드가 NULL 일때, 노드 삽입한다.
 	{
 		pNode = new tNode;
 		pNode->left = pNode->right = NULL;
@@ -84,8 +81,10 @@ tNode* deleteTree(tNode* pNode, int Data)
 				SuccP->left = Succ->right;
 			else SuccP->right = Succ->right;
 
+			// 현재 노드에 후계자 값을 대입
 			pNode->iData = Succ->iData;
 
+			// 후계자 노드 부분 삭제
 			delete Succ;
 		}
 		else if (pNode->left != NULL && pNode->right == NULL) // 삭제할 노드의 왼쪽만 있을 경우,
@@ -550,6 +549,9 @@ int main()
 	srand((unsigned int)time(0));
 
 	tNode* tHead = NULL;
+
+	for(int i=0;i< 20;++i)
+		tHead = insertTree(tHead, rand() % 100);
 
 	int Select;
 	int Num;
