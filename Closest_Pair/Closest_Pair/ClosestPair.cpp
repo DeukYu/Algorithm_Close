@@ -81,6 +81,7 @@ float cloest_pair(tPos* data, int size)
 	{
 		float cp_left;
 		float cp_right;
+
 		if (size % 2 == 1)
 		{
 			cp_left = cloest_pair(data, mid + 1); // ¿ÞÂÊ
